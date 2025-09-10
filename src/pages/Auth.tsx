@@ -104,88 +104,99 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-background/95 backdrop-blur-sm border-border/50">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-foreground">
-            {isLogin ? "Welcome Back" : "Create Account"}
-          </CardTitle>
-          <CardDescription className="text-muted-foreground">
-            {isLogin 
-              ? "Sign in to access your tickets" 
-              : "Join us to discover amazing events"
-            }
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin && (
+    <div className="min-h-screen bg-gradient-bubblegum flex flex-col">
+      {/* Logo Space */}
+      <div className="flex-1 flex items-center justify-center pt-8">
+        <div className="text-white text-4xl font-bold">LOGO</div>
+      </div>
+      
+      {/* Auth Card */}
+      <div className="flex-[3] flex items-start justify-center">
+        <Card className="w-full max-w-md mx-4 bg-black/90 backdrop-blur-sm border-0 rounded-t-3xl rounded-b-none min-h-[75vh]">
+          <CardHeader className="text-center pt-8">
+            <CardTitle className="text-2xl font-bold text-white">
+              {isLogin ? "Welcome Back" : "Create Account"}
+            </CardTitle>
+            <CardDescription className="text-gray-300">
+              {isLogin 
+                ? "Sign in to access your tickets" 
+                : "Join us to discover amazing events"
+              }
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="px-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {!isLogin && (
+                <div className="space-y-2">
+                  <label htmlFor="fullName" className="text-sm font-medium text-white">
+                    Full Name
+                  </label>
+                  <Input
+                    id="fullName"
+                    type="text"
+                    placeholder="Enter your full name"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    required={!isLogin}
+                    className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400"
+                  />
+                </div>
+              )}
+              
               <div className="space-y-2">
-                <label htmlFor="fullName" className="text-sm font-medium text-foreground">
-                  Full Name
+                <label htmlFor="email" className="text-sm font-medium text-white">
+                  Email
                 </label>
                 <Input
-                  id="fullName"
-                  type="text"
-                  placeholder="Enter your full name"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required={!isLogin}
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400"
                 />
               </div>
-            )}
+              
+              <div className="space-y-2">
+                <label htmlFor="password" className="text-sm font-medium text-white">
+                  Password
+                </label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400"
+                />
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-bubblegum text-white border-0 hover:opacity-90 transition-opacity mt-6" 
+                disabled={loading}
+              >
+                {loading ? "Please wait..." : (isLogin ? "Sign In" : "Sign Up")}
+              </Button>
+            </form>
             
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-foreground">
-                Email
-              </label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+            <div className="mt-6 text-center">
+              <button
+                type="button"
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-sm text-gray-300 hover:text-white transition-colors"
+              >
+                {isLogin 
+                  ? "Don't have an account? Sign up" 
+                  : "Already have an account? Sign in"
+                }
+              </button>
             </div>
-            
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium text-foreground">
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            
-            <Button 
-              type="submit" 
-              className="w-full" 
-              disabled={loading}
-            >
-              {loading ? "Please wait..." : (isLogin ? "Sign In" : "Sign Up")}
-            </Button>
-          </form>
-          
-          <div className="mt-6 text-center">
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-primary hover:underline"
-            >
-              {isLogin 
-                ? "Don't have an account? Sign up" 
-                : "Already have an account? Sign in"
-              }
-            </button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
