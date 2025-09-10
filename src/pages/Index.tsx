@@ -9,7 +9,7 @@ const Index = () => {
         {/* Navigation */}
         <nav className="px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
           <div className="flex items-center space-x-8">
-            <h1 className="text-2xl font-bold text-gray-800">TicketFlow</h1>
+            
             <div className="hidden md:flex items-center space-x-6 text-gray-600">
               <a href="#" className="hover:text-gray-800 transition-colors">Home</a>
               <a href="#" className="hover:text-gray-800 transition-colors">Events</a>
