@@ -327,7 +327,7 @@ const Dashboard = () => {
             <Card key={event.id} className="bg-black border-gray-800 overflow-hidden relative">
               <div className="flex flex-row p-4 md:p-6">
                 {/* Event Poster - Responsive Layout */}
-                <div className="w-24 md:w-40 h-32 md:h-32 mr-4 md:mr-6 flex-shrink-0 relative rounded-lg overflow-hidden">
+                <div className="w-24 md:w-[30%] h-32 md:h-32 mr-4 md:mr-6 flex-shrink-0 relative rounded-lg overflow-hidden">
                   <div 
                     className="w-full h-full bg-cover bg-center"
                     style={{
