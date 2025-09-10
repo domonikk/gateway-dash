@@ -322,12 +322,12 @@ const Dashboard = () => {
         </div>
 
         {/* Event Cards List */}
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {allEvents.slice(1).map((event) => (
             <Card key={event.id} className="bg-black border-gray-800 overflow-hidden relative">
-              <div className="flex flex-col md:flex-row p-6">
+              <div className="flex flex-row p-4 md:p-6">
                 {/* Event Poster - Responsive Layout */}
-                <div className="w-full md:w-48 h-48 md:h-32 mb-4 md:mb-0 md:mr-6 flex-shrink-0 relative rounded-lg overflow-hidden">
+                <div className="w-24 md:w-48 h-24 md:h-32 mr-4 md:mr-6 flex-shrink-0 relative rounded-lg overflow-hidden">
                   <div 
                     className="w-full h-full bg-cover bg-center"
                     style={{
