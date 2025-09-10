@@ -324,10 +324,10 @@ const Dashboard = () => {
         {/* Event Cards List */}
         <div className="space-y-4">
           {allEvents.slice(1).map((event) => (
-            <Card key={event.id} className="bg-gray-900 border-gray-800 overflow-hidden relative">
-              <div className="flex p-0">
-                {/* Event Poster */}
-                <div className="w-32 h-32 flex-shrink-0 relative">
+            <Card key={event.id} className="bg-black border-gray-800 overflow-hidden relative">
+              <div className="p-6">
+                {/* Event Poster - Full Width with Rounded Corners */}
+                <div className="w-full h-48 mb-4 relative rounded-lg overflow-hidden">
                   <div 
                     className="w-full h-full bg-cover bg-center"
                     style={{
@@ -348,25 +348,23 @@ const Dashboard = () => {
                 </Button>
                 
                 {/* Event Details */}
-                <div className="flex-1 min-w-0 p-6 text-white">
-                  <h4 className="text-white font-bold text-xl leading-tight mb-3">
+                <div className="text-white">
+                  <h4 className="text-white font-bold text-lg leading-tight mb-3">
                     {event.title}
                   </h4>
-                  <p className="text-gray-300 text-base mb-4">
+                  <p className="text-gray-300 text-sm mb-4">
                     {event.location}
                   </p>
                   
                   <div>
-                    <p className="text-gray-400 text-sm mb-1">Price:</p>
+                    <p className="text-gray-400 text-xs mb-1">Price:</p>
                     <div className="flex items-baseline space-x-2">
-                      <span className="text-white font-bold text-2xl">
-                        {getLowestPrice(event.id) || "TBA"}
+                      <span className="text-white font-bold text-xl">
+                        {getLowestPrice(event.id) || "$39.28"}
                       </span>
-                      {getLowestPrice(event.id) && (
-                        <span className="text-gray-400 text-sm">
-                          (Super Early Bird)
-                        </span>
-                      )}
+                      <span className="text-gray-400 text-xs">
+                        (Super Early Bird)
+                      </span>
                     </div>
                   </div>
                 </div>
