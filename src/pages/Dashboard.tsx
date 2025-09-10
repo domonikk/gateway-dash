@@ -248,47 +248,50 @@ const Dashboard = () => {
 
         <div className="space-y-4">
           {filteredEvents.slice(1).map((event) => (
-            <Card key={event.id} className="bg-card border-border backdrop-blur-sm overflow-hidden">
+            <Card key={event.id} className="bg-gray-900 border-gray-800 overflow-hidden relative">
               <div className="flex p-0">
-                <div className="w-20 h-20 rounded-l-lg overflow-hidden flex-shrink-0">
+                {/* Event Poster */}
+                <div className="w-32 h-32 flex-shrink-0 relative">
                   <div 
-                    className="w-full h-full bg-cover bg-center bg-gradient-bubblegum"
+                    className="w-full h-full bg-cover bg-center"
                     style={{
                       backgroundImage: event.image_url 
                         ? `url(${event.image_url})` 
-                        : undefined
+                        : 'url("/lovable-uploads/069cf1e4-9802-4bf0-9c5a-bf006c2456df.png")'
                     }}
                   />
                 </div>
                 
-                <div className="flex-1 min-w-0 p-4">
-                  <h4 className="text-card-foreground font-semibold text-lg leading-tight mb-1">
+                {/* Heart Icon */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 text-white hover:bg-white/20 z-10"
+                >
+                  <Bookmark className="w-5 h-5" />
+                </Button>
+                
+                {/* Event Details */}
+                <div className="flex-1 min-w-0 p-6 text-white">
+                  <h4 className="text-white font-bold text-xl leading-tight mb-3">
                     {event.title}
                   </h4>
-                  <p className="text-muted-foreground text-sm mb-2">
+                  <p className="text-gray-300 text-base mb-4">
                     {event.location}
                   </p>
                   
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-muted-foreground text-xs">Price:</p>
-                      <p className="text-card-foreground font-bold text-lg">
+                  <div>
+                    <p className="text-gray-400 text-sm mb-1">Price:</p>
+                    <div className="flex items-baseline space-x-2">
+                      <span className="text-white font-bold text-2xl">
                         {getLowestPrice(event.id) || "TBA"}
-                        {getLowestPrice(event.id) && (
-                          <span className="text-muted-foreground text-xs ml-1 font-normal">
-                            (Super Early Bird)
-                          </span>
-                        )}
-                      </p>
+                      </span>
+                      {getLowestPrice(event.id) && (
+                        <span className="text-gray-400 text-sm">
+                          (Super Early Bird)
+                        </span>
+                      )}
                     </div>
-                    
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-card-foreground hover:bg-accent"
-                    >
-                      <Bookmark className="w-5 h-5" />
-                    </Button>
                   </div>
                 </div>
               </div>
