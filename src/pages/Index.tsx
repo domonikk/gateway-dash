@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -16,8 +17,8 @@ const Index = () => {
               <a href="#" className="hover:text-gray-800 transition-colors">Pricing</a>
             </div>
           </div>
-          <Button className="bg-gradient-bubblegum text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
-            Try it for Free →
+          <Button asChild className="bg-gradient-bubblegum text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
+            <Link to="/auth">Try it for Free →</Link>
           </Button>
         </nav>
 
@@ -33,8 +34,8 @@ const Index = () => {
               Take control of your event discovery with our all-in-one ticketing app. Find events, 
               book tickets, and focus on what matters—without the overwhelm.
             </p>
-            <Button className="bg-gradient-bubblegum text-white px-8 py-3 text-lg font-semibold rounded-full hover:opacity-90 transition-opacity">
-              Try it for Free →
+            <Button asChild className="bg-gradient-bubblegum text-white px-8 py-3 text-lg font-semibold rounded-full hover:opacity-90 transition-opacity">
+              <Link to="/auth">Try it for Free →</Link>
             </Button>
           </div>
         </main>
