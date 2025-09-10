@@ -16,7 +16,7 @@ const Index = () => {
               <a href="#" className="hover:text-gray-800 transition-colors">Pricing</a>
             </div>
           </div>
-          <Button variant="outline" className="border-gray-300 text-gray-600 hover:bg-gray-50">
+          <Button className="bg-gradient-bubblegum text-white px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
             Try it for Free →
           </Button>
         </nav>
@@ -40,8 +40,14 @@ const Index = () => {
         </main>
       </div>
 
+      {/* Smooth Transition */}
+      <div className="h-32 bg-gradient-to-b from-white to-transparent relative">
+        <div className="absolute inset-0 bg-gradient-bubblegum opacity-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(255,105,180,0.1)]"></div>
+      </div>
+
       {/* Features Section - Gradient Background */}
-      <section className="bg-gradient-bubblegum px-6 py-20">
+      <section className="bg-gradient-bubblegum px-6 py-20 -mt-32 pt-32">
          <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
