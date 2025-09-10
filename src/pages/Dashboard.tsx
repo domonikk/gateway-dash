@@ -239,13 +239,14 @@ const Dashboard = () => {
 
       {/* Popular Events */}
       <div className="px-4 pb-8">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-6">
           <h3 className="text-foreground text-xl font-semibold">Popular Events</h3>
           <Button variant="ghost" size="sm" className="text-foreground hover:bg-accent">
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
 
+        {/* Event Cards List */}
         <div className="space-y-4">
           {filteredEvents.slice(1).map((event) => (
             <Card key={event.id} className="bg-gray-900 border-gray-800 overflow-hidden relative">
