@@ -325,9 +325,9 @@ const Dashboard = () => {
         <div className="space-y-4">
           {allEvents.slice(1).map((event) => (
             <Card key={event.id} className="bg-black border-gray-800 overflow-hidden relative">
-              <div className="p-6">
-                {/* Event Poster - Full Width with Rounded Corners */}
-                <div className="w-full h-48 mb-4 relative rounded-lg overflow-hidden">
+              <div className="flex flex-col md:flex-row p-6">
+                {/* Event Poster - Responsive Layout */}
+                <div className="w-full md:w-48 h-48 md:h-32 mb-4 md:mb-0 md:mr-6 flex-shrink-0 relative rounded-lg overflow-hidden">
                   <div 
                     className="w-full h-full bg-cover bg-center"
                     style={{
@@ -348,7 +348,7 @@ const Dashboard = () => {
                 </Button>
                 
                 {/* Event Details */}
-                <div className="text-white">
+                <div className="flex-1 text-white">
                   <h4 className="text-white font-bold text-lg leading-tight mb-3">
                     {event.title}
                   </h4>
