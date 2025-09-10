@@ -131,10 +131,85 @@ const Dashboard = () => {
     return formatPrice(lowestPrice);
   };
 
+  const getRandomImage = (seed: string) => {
+    // Create a simple hash from the event ID to ensure consistent random images
+    const hash = seed.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0);
+      return a & a;
+    }, 0);
+    
+    const imageOptions = [
+      '/lovable-uploads/069cf1e4-9802-4bf0-9c5a-bf006c2456df.png',
+      '/lovable-uploads/74372ba7-426d-4e85-bd6d-beaf65b66392.png',
+      'https://picsum.photos/400/400?random=1',
+      'https://picsum.photos/400/400?random=2',
+      'https://picsum.photos/400/400?random=3',
+      'https://picsum.photos/400/400?random=4',
+      'https://picsum.photos/400/400?random=5',
+    ];
+    
+    return imageOptions[Math.abs(hash) % imageOptions.length];
+  };
+
   const filteredEvents = events.filter(event =>
     event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     event.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Add placeholder events for demonstration when we have limited real events
+  const placeholderEvents = [
+    {
+      id: 'placeholder-1',
+      title: 'Summer Music Festival',
+      location: 'Central Park, Kingston',
+      event_date: '2025-08-15',
+      start_time: '18:00:00',
+      end_time: '23:00:00',
+      description: 'A vibrant music festival featuring local and international artists',
+      image_url: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 'placeholder-2', 
+      title: 'Food & Wine Expo',
+      location: 'Convention Centre, Montego Bay',
+      event_date: '2025-09-20',
+      start_time: '12:00:00',
+      end_time: '20:00:00',
+      description: 'Taste the best cuisine and wines from around the Caribbean',
+      image_url: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 'placeholder-3',
+      title: 'Caribbean Art Exhibition',
+      location: 'National Gallery, Spanish Town',
+      event_date: '2025-10-05',
+      start_time: '10:00:00', 
+      end_time: '18:00:00',
+      description: 'Showcasing contemporary Caribbean art and culture',
+      image_url: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: 'placeholder-4',
+      title: 'Beach Volleyball Tournament',
+      location: 'Seven Mile Beach, Negril',
+      event_date: '2025-11-12',
+      start_time: '08:00:00',
+      end_time: '17:00:00', 
+      description: 'Professional beach volleyball competition with cash prizes',
+      image_url: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }
+  ];
+
+  // Combine real events with placeholders for demo purposes
+  const allEvents = [...filteredEvents, ...placeholderEvents];
 
   if (loading) {
     return (
@@ -196,15 +271,15 @@ const Dashboard = () => {
       </div>
 
       {/* Featured Event Carousel */}
-      {filteredEvents.length > 0 && (
+      {allEvents.length > 0 && (
         <div className="px-4 mb-8">
           <div className="relative h-96 rounded-2xl overflow-hidden">
             <div 
               className="absolute inset-0 bg-cover bg-center"
               style={{
-                backgroundImage: filteredEvents[0].image_url 
-                  ? `url(${filteredEvents[0].image_url})` 
-                  : 'url("/lovable-uploads/069cf1e4-9802-4bf0-9c5a-bf006c2456df.png")'
+                backgroundImage: allEvents[0].image_url 
+                  ? `url(${allEvents[0].image_url})` 
+                  : `url(${getRandomImage(allEvents[0].id)})`
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -212,18 +287,18 @@ const Dashboard = () => {
             
             <div className="absolute bottom-8 left-6 right-6">
               <h2 className="text-white text-3xl font-bold mb-2">
-                {filteredEvents[0].title}
+                {allEvents[0].title}
               </h2>
               <p className="text-white/90 text-lg mb-1">
-                {filteredEvents[0].location}
+                {allEvents[0].location}
               </p>
               <p className="text-white/80 text-sm">
-                {new Date(filteredEvents[0].event_date).toLocaleDateString()}
+                {new Date(allEvents[0].event_date).toLocaleDateString()}
               </p>
               
               {/* Carousel dots */}
               <div className="flex justify-center space-x-2 mt-6">
-                {Array.from({ length: Math.min(7, filteredEvents.length) }).map((_, i) => (
+                {Array.from({ length: Math.min(7, allEvents.length) }).map((_, i) => (
                   <div
                     key={i}
                     className={`w-2 h-2 rounded-full ${
@@ -248,7 +323,7 @@ const Dashboard = () => {
 
         {/* Event Cards List */}
         <div className="space-y-4">
-          {filteredEvents.slice(1).map((event) => (
+          {allEvents.slice(1).map((event) => (
             <Card key={event.id} className="bg-gray-900 border-gray-800 overflow-hidden relative">
               <div className="flex p-0">
                 {/* Event Poster */}
@@ -258,7 +333,7 @@ const Dashboard = () => {
                     style={{
                       backgroundImage: event.image_url 
                         ? `url(${event.image_url})` 
-                        : 'url("/lovable-uploads/069cf1e4-9802-4bf0-9c5a-bf006c2456df.png")'
+                        : `url(${getRandomImage(event.id)})`
                     }}
                   />
                 </div>
@@ -300,7 +375,7 @@ const Dashboard = () => {
           ))}
         </div>
 
-        {filteredEvents.length === 0 && (
+        {allEvents.length === 0 && (
           <div className="text-center py-12">
             <p className="text-muted-foreground text-lg">No events found</p>
             <p className="text-muted-foreground/60 text-sm mt-2">Try adjusting your search</p>
