@@ -148,18 +148,18 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="relative px-4 pt-12 pb-6">
+      <div className="relative px-4 pt-12 pb-6 bg-gradient-bubblegum">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
-            <Avatar className="w-10 h-10 bg-white/20 border border-white/30">
-              <AvatarFallback className="bg-white/20 text-white font-semibold">
+            <Avatar className="w-10 h-10 bg-card/20 border border-white/30">
+              <AvatarFallback className="bg-card/20 text-foreground font-semibold">
                 {getUserInitials()}
               </AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-white text-lg font-medium">Username</p>
+              <p className="text-foreground text-lg font-medium">Username</p>
             </div>
           </div>
           
@@ -167,16 +167,16 @@ const Dashboard = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="relative text-white hover:bg-white/20"
+              className="relative text-foreground hover:bg-white/20"
             >
               <Bell className="w-5 h-5" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full"></div>
             </Button>
             <Button
               variant="ghost"
               size="sm"
               onClick={handleSignOut}
-              className="text-white hover:bg-white/20"
+              className="text-foreground hover:bg-white/20"
             >
               Sign Out
             </Button>
@@ -185,12 +185,12 @@ const Dashboard = () => {
 
         {/* Search Bar */}
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
           <Input
             placeholder="Search for events"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-12 h-12 bg-white/90 backdrop-blur-sm border-0 rounded-full text-gray-900 placeholder-gray-500"
+            className="pl-12 h-12 bg-card/90 backdrop-blur-sm border-0 rounded-full text-foreground placeholder-muted-foreground"
           />
         </div>
       </div>
@@ -240,55 +240,70 @@ const Dashboard = () => {
       {/* Popular Events */}
       <div className="px-4 pb-8">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-white text-xl font-semibold">Popular Events</h3>
-          <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
+          <h3 className="text-foreground text-xl font-semibold">Popular Events</h3>
+          <Button variant="ghost" size="sm" className="text-foreground hover:bg-muted">
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
 
         <div className="space-y-4">
           {filteredEvents.slice(1).map((event) => (
-            <Card key={event.id} className="bg-gray-900/50 border-gray-800 backdrop-blur-sm">
-              <div className="flex p-4">
-                <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 mr-4">
-                  <div 
-                    className="w-full h-full bg-cover bg-center"
-                    style={{
-                      backgroundImage: event.image_url 
-                        ? `url(${event.image_url})` 
-                        : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                    }}
-                  />
+            <Card key={event.id} className="bg-card border-border backdrop-blur-sm rounded-3xl overflow-hidden">
+              <div className="p-4">
+                <div className="flex items-center space-x-4 mb-3">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 bg-gradient-card">
+                    <div 
+                      className="w-full h-full bg-cover bg-center"
+                      style={{
+                        backgroundImage: event.image_url 
+                          ? `url(${event.image_url})` 
+                          : 'linear-gradient(135deg, hsl(var(--baby-blue)), hsl(var(--bubblegum-pink)))'
+                      }}
+                    />
+                  </div>
+                  
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-foreground font-bold text-lg leading-tight mb-1">
+                      {event.title}
+                    </h4>
+                    <p className="text-muted-foreground text-sm">
+                      {event.location}
+                    </p>
+                  </div>
+                  
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-foreground hover:bg-muted rounded-full"
+                  >
+                    <Bookmark className="w-5 h-5" />
+                  </Button>
                 </div>
                 
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-white font-semibold text-lg leading-tight mb-1">
-                    {event.title}
-                  </h4>
-                  <p className="text-gray-300 text-sm mb-2">
-                    {event.location}
-                  </p>
-                  
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-gray-400 text-xs">Price:</p>
-                      <p className="text-white font-bold text-lg">
-                        {getLowestPrice(event.id) || "TBA"}
-                        {getLowestPrice(event.id) && (
-                          <span className="text-gray-400 text-xs ml-1 font-normal">
-                            (Super Early Bird)
-                          </span>
-                        )}
+                <div className="flex items-center justify-between pl-20">
+                  <div className="flex flex-col">
+                    <p className="text-muted-foreground text-xs uppercase tracking-wide">Price</p>
+                    <p className="text-foreground font-bold text-xl">
+                      {getLowestPrice(event.id) || "TBA"}
+                    </p>
+                    {getLowestPrice(event.id) && (
+                      <p className="text-muted-foreground text-xs">
+                        Super Early Bird
                       </p>
-                    </div>
-                    
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-white hover:bg-white/20"
-                    >
-                      <Bookmark className="w-5 h-5" />
-                    </Button>
+                    )}
+                  </div>
+                  
+                  <div className="flex flex-col items-end">
+                    <p className="text-muted-foreground text-xs uppercase tracking-wide">Date</p>
+                    <p className="text-foreground font-semibold text-sm">
+                      {new Date(event.event_date).toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {event.start_time}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -298,8 +313,8 @@ const Dashboard = () => {
 
         {filteredEvents.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-white/60 text-lg">No events found</p>
-            <p className="text-white/40 text-sm mt-2">Try adjusting your search</p>
+            <p className="text-muted-foreground text-lg">No events found</p>
+            <p className="text-muted-foreground text-sm mt-2">Try adjusting your search</p>
           </div>
         )}
       </div>
