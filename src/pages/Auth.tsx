@@ -104,16 +104,9 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-bubblegum flex items-end justify-center p-4">
-      {/* Logo space */}
-      <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
-        <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center">
-          <span className="text-white font-bold text-2xl">T</span>
-        </div>
-      </div>
-      
-      <Card className="w-full max-w-md bg-card border-border/50 rounded-t-3xl min-h-[75vh]">
-        <CardHeader className="text-center pt-12">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md bg-background/95 backdrop-blur-sm border-border/50">
+        <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-foreground">
             {isLogin ? "Welcome Back" : "Create Account"}
           </CardTitle>
@@ -124,7 +117,7 @@ const Auth = () => {
             }
           </CardDescription>
         </CardHeader>
-        <CardContent className="px-6">
+        <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
               <div className="space-y-2">
@@ -138,7 +131,6 @@ const Auth = () => {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required={!isLogin}
-                  className="bg-muted border-border"
                 />
               </div>
             )}
@@ -154,7 +146,6 @@ const Auth = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-muted border-border"
               />
             </div>
             
@@ -169,13 +160,12 @@ const Auth = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-muted border-border"
               />
             </div>
             
             <Button 
               type="submit" 
-              className="w-full bg-gradient-primary hover:opacity-90 border-0" 
+              className="w-full" 
               disabled={loading}
             >
               {loading ? "Please wait..." : (isLogin ? "Sign In" : "Sign Up")}
@@ -186,7 +176,7 @@ const Auth = () => {
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-bubblegum-hot hover:underline"
+              className="text-sm text-primary hover:underline"
             >
               {isLogin 
                 ? "Don't have an account? Sign up" 
