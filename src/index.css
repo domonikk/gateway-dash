@@ -39,9 +39,14 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    /* Custom gradient colors */
-    --gradient-bubblegum: linear-gradient(135deg, #ff6b9d 0%, #ff1493 25%, #87ceeb 75%, #ffffff 100%);
-    --gradient-soft: linear-gradient(135deg, rgba(255, 107, 157, 0.8) 0%, rgba(255, 20, 147, 0.8) 25%, rgba(135, 206, 235, 0.8) 75%, rgba(255, 255, 255, 0.8) 100%);
+    /* Custom gradient colors - Bubblegum theme */
+    --gradient-bubblegum: linear-gradient(135deg, #ff69b4 0%, #ff1493 30%, #87ceeb 70%, #ffffff 100%);
+    --gradient-soft: linear-gradient(135deg, rgba(255, 105, 180, 0.8) 0%, rgba(255, 20, 147, 0.8) 30%, rgba(135, 206, 235, 0.8) 70%, rgba(255, 255, 255, 0.8) 100%);
+    
+    /* Brand colors */
+    --brand-primary: 330 81% 60%; /* Hot pink */
+    --brand-secondary: 203 92% 75%; /* Baby blue */
+    --brand-accent: 350 100% 88%; /* Light pink */
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
